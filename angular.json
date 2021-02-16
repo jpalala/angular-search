@@ -42,6 +42,126 @@
           }
         }
       }
+    },
+    "lookapp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/lookapp",
+      "sourceRoot": "projects/lookapp/src",
+      "prefix": "look",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lookapp",
+            "index": "projects/lookapp/src/index.html",
+            "main": "projects/lookapp/src/main.ts",
+            "polyfills": "projects/lookapp/src/polyfills.ts",
+            "tsConfig": "projects/lookapp/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/lookapp/src/favicon.ico",
+              "projects/lookapp/src/assets"
+            ],
+            "styles": [
+              "projects/lookapp/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/lookapp/src/environments/environment.ts",
+                  "with": "projects/lookapp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "lookapp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lookapp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lookapp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lookapp/src/test.ts",
+            "polyfills": "projects/lookapp/src/polyfills.ts",
+            "tsConfig": "projects/lookapp/tsconfig.spec.json",
+            "karmaConfig": "projects/lookapp/karma.conf.js",
+            "assets": [
+              "projects/lookapp/src/favicon.ico",
+              "projects/lookapp/src/assets"
+            ],
+            "styles": [
+              "projects/lookapp/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/lookapp/tsconfig.app.json",
+              "projects/lookapp/tsconfig.spec.json",
+              "projects/lookapp/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/lookapp/e2e/protractor.conf.js",
+            "devServerTarget": "lookapp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lookapp:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "searchbox"
