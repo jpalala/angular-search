@@ -3,12 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lib-searchbox',
   template: `
-    <p>
-      searchbox works!
-    </p>
+   <input type="text">
   `,
-  styles: [
-  ]
+  styleUrls: ['./searchbox.component.css']
 })
 export class SearchboxComponent implements OnInit {
 
